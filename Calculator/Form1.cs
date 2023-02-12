@@ -70,25 +70,16 @@ namespace Calculator
             resultValue = 0;
         }
 
+        static Double Eval(String expression)
+        {
+            System.Data.DataTable table = new System.Data.DataTable();
+            return Convert.ToDouble(table.Compute(expression, String.Empty));
+        }
+
         private void button15_Click(object sender, EventArgs e)
         {
-            switch (operationPerformed)
-            {
-                case "+":
-                    textBox_Result.Text = (resultValue + Double.Parse(textBox_Result.Text)).ToString();
-                    break;
-                case "-":
-                    textBox_Result.Text = (resultValue - Double.Parse(textBox_Result.Text)).ToString();
-                    break;
-                case "*":
-                    textBox_Result.Text = (resultValue * Double.Parse(textBox_Result.Text)).ToString();
-                    break;
-                case "/":
-                    textBox_Result.Text = (resultValue / Double.Parse(textBox_Result.Text)).ToString();
-                    break;
-                default:
-                    break;
-            }
+            string OperationString = resultValue.ToString() + operationPerformed + textBox_Result.Text;
+            textBox_Result.Text = (Eval(OperationString)).ToString();
             resultValue = Double.Parse(textBox_Result.Text);
             labelCurrentOperation.Text = "";
         }
